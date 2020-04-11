@@ -1,5 +1,6 @@
 package com.usermanagement.userManagementApp.controller;
 
+import java.io.Console;
 import java.net.URI;
 import java.util.List;
 
@@ -17,9 +18,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.usermanagement.userManagementApp.dto.User;
 import com.usermanagement.userManagementApp.service.UserService;
 
-@RestController
+@RestController // controller +response bodyr
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -37,8 +38,9 @@ public class UserController {
 	@PostMapping("/user")
 	public ResponseEntity<Object> addUser(@RequestBody User user) {
 		userService.addUser(user);
+
+		URI url = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
 		
-		URI url=ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
 		return ResponseEntity.created(url).build();
 	}
 

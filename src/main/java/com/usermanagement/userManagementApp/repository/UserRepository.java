@@ -31,7 +31,7 @@ public class UserRepository {
 
 	public User updateUser(User user) {
 		for (User us : listOfUsers) {
-			if (user.getId() == us.getId()) {
+			if (user.getId().equals(us.getId())) {
 				us.setId(user.getId());
 				us.setName(user.getName());
 				us.setAddress(user.getAddress());
